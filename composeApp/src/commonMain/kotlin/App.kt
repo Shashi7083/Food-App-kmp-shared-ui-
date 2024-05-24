@@ -25,7 +25,7 @@ import screens.WelcomeScreen
 fun App() {
     MaterialTheme {
 
-        var startDestination = Routes.LoginRegister.route
+        var startDestination = Routes.UserWork.route
         ScreenNavGraph(
             startDestination = startDestination
         )

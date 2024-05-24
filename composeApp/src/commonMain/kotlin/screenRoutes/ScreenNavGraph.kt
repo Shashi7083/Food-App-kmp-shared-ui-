@@ -5,11 +5,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import screens.BoxScreen
 import screens.ForgotPasswordScreen
+import screens.HomeScreen
 import screens.LoginScreen
 import screens.NewPasswordScreen
 import screens.OTPVerificationScreen
 import screens.PasswordChangedScreen
+import screens.PaymentScreen
 import screens.RegisterScreen
 import screens.WelcomeScreen
 
@@ -68,6 +71,29 @@ fun ScreenNavGraph(
                 PasswordChangedScreen(navController = navController)
             }
 
+        }
+
+        navigation(
+            route = Routes.UserWork.route,
+            startDestination = BottomNavScreen.HomeScreen.route
+        ){
+            composable(
+                route = BottomNavScreen.HomeScreen.route
+            ){
+                HomeScreen(navController = navController)
+            }
+
+            composable(
+                route = BottomNavScreen.BoxScreen.route
+            ){
+                BoxScreen(navController = navController)
+            }
+
+            composable(
+                route = BottomNavScreen.PaymentScreen.route
+            ){
+                PaymentScreen(navController = navController)
+            }
         }
     }
 }

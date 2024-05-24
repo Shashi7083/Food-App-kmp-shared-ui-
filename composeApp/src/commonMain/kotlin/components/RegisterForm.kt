@@ -272,6 +272,11 @@ fun RegisterForm(){
 
 }
 
+//fun isValidEmail(email: String): Boolean {
+//    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//}
+
 fun isValidEmail(email: String): Boolean {
-    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    val emailRegex = "^[A-Za-z0-9+_.-]+@(.+)\$"
+    return emailRegex.toRegex().matches(email)
 }

@@ -30,6 +30,10 @@ sealed class Routes (
     // end of all start screen
 
 
+    //main screens
+    object UserWork : Routes(
+        route = "users_work"
+    )
 
 
 }

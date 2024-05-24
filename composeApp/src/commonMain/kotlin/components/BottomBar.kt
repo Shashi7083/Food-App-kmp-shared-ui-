@@ -1,9 +1,15 @@
 package components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -37,7 +43,7 @@ fun BottomBar(
     val selectedScreen = backStackEntry?.destination?.route
 
     BottomNavigation(
-        modifier = Modifier.height(83.dp),
+        modifier = Modifier.height(73.dp),
         backgroundColor = Color.White,
         elevation = 15.dp
     ){
@@ -53,26 +59,30 @@ fun BottomBar(
                 },
                 icon = {
                     Column (
-                        modifier = Modifier.height(80.dp),
+                        modifier = Modifier.padding(),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                        verticalArrangement = Arrangement.spacedBy(5.dp)
                     ){
 
-                        if(selectedScreen.equals(screen.route)){
-                            AnimatedVisibility(true){
-                                Icon(
-                                    painter = painterResource(screen.selectedIcon),
-                                    contentDescription = "selected icon"
-                                )
-                            }
-                        }else{
-                            AnimatedVisibility(true){
-                                Icon(
-                                    painter = painterResource(screen.unselectedIcon),
-                                    contentDescription = "selected icon"
-                                )
-                            }
+                        AnimatedVisibility(selectedScreen.equals(screen.route)){
+                            Box(
+                                modifier = Modifier
+                                    .height(10.dp)
+                                    .fillMaxWidth(0.35f)
+                                    .background(Color(0xff7356bf), shape = RoundedCornerShape(bottomStart = 5.dp, bottomEnd = 5.dp))
+                            )
                         }
+
+
+
+                        Icon(
+                            painter = if(selectedScreen.equals(screen.route)) painterResource(screen.selectedIcon) else painterResource(screen.unselectedIcon),
+                            contentDescription = "selected icon",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.width(30.dp).height(30.dp)
+                        )
+
+
 
                         Text(
                             text = screen.name,
