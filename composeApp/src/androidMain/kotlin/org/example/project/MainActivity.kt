@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun AppAndroidPreview() {
-//    App()
-    LoginScreen()
+    App()
+
 }
 

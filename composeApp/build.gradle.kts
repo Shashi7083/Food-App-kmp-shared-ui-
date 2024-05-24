@@ -50,7 +50,7 @@ kotlin {
             implementation(libs.image.loader)
             implementation("dev.icerock.moko:resources:0.23.0")
             implementation("dev.icerock.moko:resources-compose:0.23.0") // for compose multiplatform
-
+            implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
         }
     }
 }

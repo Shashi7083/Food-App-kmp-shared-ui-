@@ -10,6 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import screenRoutes.Routes
+import screenRoutes.ScreenNavGraph
+import screens.ForgotPasswordScreen
+import screens.NewPasswordScreen
+import screens.OTPVerificationScreen
+import screens.PasswordChangedScreen
+import screens.RegisterScreen
 import screens.WelcomeScreen
 
 
@@ -17,7 +24,11 @@ import screens.WelcomeScreen
 @Preview
 fun App() {
     MaterialTheme {
-        WelcomeScreen()
+
+        var startDestination = Routes.LoginRegister.route
+        ScreenNavGraph(
+            startDestination = startDestination
+        )
     }
 }
 

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.seiko.imageloader.rememberImagePainter
 import getPlatform
 import org.example.project.resources.Res
@@ -39,7 +40,9 @@ import kotlin.time.TestTimeSource
 
 
 @Composable
-fun WelcomeScreen(){
+fun WelcomeScreen(
+    navController : NavHostController
+){
 
     val platform = getPlatform()
 

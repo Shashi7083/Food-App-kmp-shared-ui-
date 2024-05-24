@@ -1,13 +1,9 @@
 package screens
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,29 +17,21 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import components.GoBack
 import components.HeadingText
@@ -51,63 +39,46 @@ import org.example.project.resources.Res
 import org.example.project.resources.hide
 import org.example.project.resources.seen
 import org.jetbrains.compose.resources.painterResource
-import utils.getVibrationUtil
-
 
 @Composable
-fun LoginScreen(
-    navController: NavHostController
+fun NewPasswordScreen(
+    navController : NavHostController
 ){
 
-//    val context = LocalContext.current
-//    val vibrationUtil = getVibrationUtil()
-
-    var email by remember { mutableStateOf("") }
-    var isEmailValid by remember { mutableStateOf(false) }
     var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
-
+    var showConfirmPassword by remember { mutableStateOf(false) }
+    var passwordError by remember { mutableStateOf(false) }
+    var confirmPasswordError by remember { mutableStateOf(false) }
     Column (
         modifier = Modifier.fillMaxSize()
             .padding(start = 20.dp, end = 20.dp, top = 25.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(25.dp)
-    ){
+    ) {
         GoBack()
 
-        HeadingText(text = "Welcome back! Glad to see you, Again!")
+        HeadingText(text = "Create new password")
 
+        Text(
+            text = "Your new password must be unique from thos previously used.",
+            style = TextStyle(
+                color = Color(0xff808080)
+            )
+        )
 
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
-            OutlinedTextField(
-                value = email,
-                onValueChange = {
-                    email = it
-                    isEmailValid = isValidEmail(email)
-                },
-                modifier = Modifier.fillMaxWidth()
-                    .background(Color(0xfff7f8f9)),
-                placeholder = {
-                    Text(
-                        text = "Enter your email"
-                    )
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Email,
-                    imeAction =  ImeAction.Done
-                ),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    unfocusedBorderColor = Color(0xffe8ecf4)
-
-                )
-            )
 
             OutlinedTextField(
                 value = password,
                 onValueChange = {
                     password = it
+                    if(!password.isEmpty()){
+                        passwordError = false
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,11 +88,12 @@ fun LoginScreen(
                     imeAction = ImeAction.Done
                 ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    unfocusedBorderColor = Color(0xffe8ecf4)
+                    unfocusedBorderColor = if(passwordError) Color.Red else Color(0xffe8ecf4),
+                    focusedBorderColor = if(passwordError) Color.Red else Color(0xff7356bf)
                 ),
                 placeholder = {
                     Text(
-                        text = "Enter your password"
+                        text = "Password"
                     )
                 },
                 visualTransformation = if(showPassword) VisualTransformation.None else PasswordVisualTransformation(),
@@ -149,25 +121,70 @@ fun LoginScreen(
                 }
             )
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ){
-                Text(
-                    text = "Forgot Password?",
-                    style = TextStyle(
-                        color = Color(0xff808080)
+
+            OutlinedTextField(
+                value = confirmPassword,
+                onValueChange = {
+                    confirmPassword = it
+                    if(!confirmPassword.isEmpty()){
+                        confirmPasswordError = false
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xfff7f8f9)),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedBorderColor = if(confirmPasswordError) Color.Red else Color(0xffe8ecf4),
+                    focusedBorderColor = if(confirmPasswordError) Color.Red else Color(0xff7356bf)
+                ),
+                placeholder = {
+                    Text(
+                        text = "Confirm password"
                     )
-                )
-            }
+                },
+                visualTransformation = if(showConfirmPassword) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            showConfirmPassword = !showConfirmPassword
+                        }
+                    ){
+                        AnimatedVisibility(showConfirmPassword){
+                            Icon(
+                                painter = painterResource(Res.drawable.seen),
+                                contentDescription = null,
+                                modifier = Modifier.height(20.dp)
+                            )
+                        }
+                        AnimatedVisibility(!showConfirmPassword){
+                            Icon(
+                                painter = painterResource(Res.drawable.hide),
+                                contentDescription = null,
+                                modifier = Modifier.height(20.dp)
+                            )
+                        }
+                    }
+                }
+            )
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
 
         Button(
             onClick = {
-                if(isEmailValid){
-
-                }else{
-
+                if(password.isEmpty()){
+                    passwordError = true
+                }
+                if(confirmPassword.isEmpty()){
+                    confirmPasswordError = true
+                }
+                if(!password.equals(confirmPassword)){
+                    passwordError = true
+                    confirmPasswordError = true
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -176,7 +193,7 @@ fun LoginScreen(
             shape = RoundedCornerShape(5.dp)
         ){
             Text(
-                text = "Login",
+                text = "Reset Password",
                 style = TextStyle(
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
@@ -184,34 +201,5 @@ fun LoginScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Row (
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Text(
-                text = "Don't have an accoutn? ",
-            )
-            Text(
-                text = "Register Now",
-                style = TextStyle(
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color(0xff35c2c1)
-                )
-            )
-        }
-
-
     }
 }
-
-fun isValidEmail(email: String): Boolean {
-    return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-}
-
-
-
-
-
