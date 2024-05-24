@@ -51,7 +51,9 @@ kotlin {
             implementation("dev.icerock.moko:resources:0.23.0")
             implementation("dev.icerock.moko:resources-compose:0.23.0") // for compose multiplatform
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
-
+            implementation("tech.annexflow.compose:constraintlayout-compose-multiplatform:0.4.0") //Constraint Layout
+//            implementation("com.raedghazal:kotlinx_datetime_ext:1.2.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
         }
     }
 }

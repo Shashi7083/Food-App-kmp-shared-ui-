@@ -23,6 +23,24 @@ val textColorLight = Color(0xff8391a1)
 val errorColor = Color(0xffff1c1c)
 
 
+////example
+//val colors = darkColors(
+//    primary = Color(0xFF3F51B5),
+//    primaryVariant = Color(0xFF303F9F),
+//    onPrimary = Color.White,
+//    secondary = Color(0xFF0097A7),
+//    secondaryVariant = Color(0xFF00798C),
+//    onSecondary = Color.White,
+//    background = Color(0xFF424242),
+//    onBackground = Color.White,
+//    surface = Color(0xFF424242),
+//    onSurface = Color.White,
+//    error = Color(0xFFB00020),
+//    onError = Color.White,
+//    isLight = false
+//)
+
+
 
 
 
