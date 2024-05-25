@@ -16,6 +16,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.LocalAbsoluteElevation
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +31,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import org.jetbrains.compose.resources.painterResource
 import screenRoutes.BottomNavScreen
+import screenRoutes.Routes
 
 @Composable
 fun BottomBar(
@@ -51,11 +56,14 @@ fun BottomBar(
             BottomNavigationItem(
                 selected =  selectedScreen.equals(screen.route),
                 onClick = {
-                    navController.navigate(screen.route){
-                        popUpTo(screen.route){
-                            inclusive = true
+                    if(!selectedScreen.equals(screen.route)){
+                        navController.navigate(screen.route){
+                            popUpTo(screen.route){
+                                inclusive = true
+                            }
                         }
                     }
+
                 },
                 icon = {
                     Column (
@@ -64,7 +72,7 @@ fun BottomBar(
                         verticalArrangement = Arrangement.spacedBy(5.dp)
                     ){
 
-                        AnimatedVisibility(selectedScreen.equals(screen.route)){
+                        AnimatedVisibility(selectedScreen.equals(screen.route) ){
                             Box(
                                 modifier = Modifier
                                     .height(10.dp)

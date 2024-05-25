@@ -35,5 +35,9 @@ sealed class Routes (
         route = "users_work"
     )
 
+    object ExtraOrderScreen : Routes(
+        route = "extra_order_screen"
+    )
+
 
 }

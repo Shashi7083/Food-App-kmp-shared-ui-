@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import screens.BoxScreen
+import screens.ExtraOrderScreen
 import screens.ForgotPasswordScreen
 import screens.HomeScreen
 import screens.LoginScreen
@@ -93,6 +94,12 @@ fun ScreenNavGraph(
                 route = BottomNavScreen.PaymentScreen.route
             ){
                 PaymentScreen(navController = navController)
+            }
+
+            composable(
+                route = Routes.ExtraOrderScreen.route
+            ){
+                ExtraOrderScreen(navController = navController)
             }
         }
     }

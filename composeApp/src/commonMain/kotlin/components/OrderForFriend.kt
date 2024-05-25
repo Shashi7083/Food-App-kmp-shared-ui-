@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import screenRoutes.Routes
 
 @Composable
 fun OrderForFriend(
@@ -45,6 +46,11 @@ fun OrderForFriend(
             Button(
                 onClick = {
                     //navigate from here
+                          navController.navigate(Routes.ExtraOrderScreen.route){
+                              popUpTo(route = Routes.ExtraOrderScreen.route){
+                                  inclusive = true
+                              }
+                          }
                 },
                 modifier = Modifier.fillMaxWidth(0.6f)
                     .height(54.dp),

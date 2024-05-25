@@ -39,7 +39,7 @@ import org.jetbrains.compose.resources.painterResource
 fun HomeHeader(){
 
 
-    var todayMeanStatus by remember { mutableStateOf("Your todays meal is on the way") }
+    var todayMealStatus by remember { mutableStateOf("Your todays meal is on the way") }
 
 
         ConstraintLayout(
@@ -140,7 +140,7 @@ fun HomeHeader(){
                     }
 
                     Text(
-                        text = todayMeanStatus,
+                        text = todayMealStatus,
                         fontSize = 11.sp,
                         color = Color(0xffffffff),
                         modifier = Modifier.padding(start = 20.dp)
