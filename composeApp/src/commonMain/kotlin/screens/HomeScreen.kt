@@ -63,14 +63,16 @@ fun HomeScreen(
             Column(
                 modifier =  Modifier.fillMaxSize()
                     .padding(it)
+
             ) {
                 HomeHeader()
-                Spacer(modifier = Modifier.height(20.dp))
+
                 Column(
                     modifier =  Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
+                    Spacer(modifier = Modifier.height(20.dp))
                     NeedLunch {
                         needLunch = it
                     }

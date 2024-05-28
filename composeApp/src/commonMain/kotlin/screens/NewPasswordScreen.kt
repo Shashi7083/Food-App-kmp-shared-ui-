@@ -39,6 +39,7 @@ import org.example.project.resources.Res
 import org.example.project.resources.hide
 import org.example.project.resources.seen
 import org.jetbrains.compose.resources.painterResource
+import screenRoutes.Routes
 
 @Composable
 fun NewPasswordScreen(
@@ -56,7 +57,7 @@ fun NewPasswordScreen(
             .padding(start = 20.dp, end = 20.dp, top = 25.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
-        GoBack()
+        GoBack(navController = navController)
 
         HeadingText(text = "Create new password")
 
@@ -185,6 +186,14 @@ fun NewPasswordScreen(
                 if(!password.equals(confirmPassword)){
                     passwordError = true
                     confirmPasswordError = true
+                }
+
+                if(!passwordError && !confirmPasswordError){
+                    navController.navigate(Routes.PasswordChangedScreen.route){
+                        popUpTo(Routes.PasswordChangedScreen.route){
+                            inclusive = true
+                        }
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth()

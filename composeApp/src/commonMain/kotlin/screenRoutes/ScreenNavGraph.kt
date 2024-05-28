@@ -15,6 +15,7 @@ import screens.OTPVerificationScreen
 import screens.PasswordChangedScreen
 import screens.PaymentScreen
 import screens.RegisterScreen
+import screens.RegisterUserOTPScreen
 import screens.WelcomeScreen
 
 @Composable
@@ -64,6 +65,10 @@ fun ScreenNavGraph(
                 route = Routes.OTPVerificationScreen.route
             ){
                 OTPVerificationScreen(navController = navController)
+            }
+
+            composable(route = Routes.RegisterUserOTPScreen.route){
+                RegisterUserOTPScreen(navController = navController)
             }
 
             composable(

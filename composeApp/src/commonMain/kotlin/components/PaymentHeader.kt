@@ -36,7 +36,7 @@ fun PaymentHeader(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
-            .height(235.dp)
+            .height(210.dp)
     ) {
         val (box1, box2) = createRefs()
 
@@ -72,9 +72,9 @@ fun PaymentHeader(
                 .constrainAs(box2){
                     start.linkTo(box1.start)
                     end.linkTo(box1.end)
-                    top.linkTo(box1.top, margin = 98.dp)
+                    top.linkTo(box1.top, margin = 70.dp)
                 }
-                .height(138.dp)
+                .height(140.dp)
                 .fillMaxWidth(0.88f)
                 .background(Color(0xff1e232c), shape = RoundedCornerShape(8.dp))
         ){

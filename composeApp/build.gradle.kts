@@ -49,12 +49,20 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.image.loader)
+            
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.bottomSheetNavigator)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.transitions)
+
+
             implementation("dev.icerock.moko:resources:0.23.0")
             implementation("dev.icerock.moko:resources-compose:0.23.0") // for compose multiplatform
             implementation("org.jetbrains.androidx.navigation:navigation-compose:2.7.0-alpha07")
             implementation("tech.annexflow.compose:constraintlayout-compose-multiplatform:0.4.0") //Constraint Layout
 //            implementation("com.raedghazal:kotlinx_datetime_ext:1.2.0")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+            implementation("io.github.wojciechosak:calendar:0.0.8-compose-1.5.11")
         }
     }
 }

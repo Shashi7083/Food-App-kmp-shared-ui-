@@ -24,6 +24,9 @@ sealed class Routes (
     object OTPVerificationScreen : Routes(
         route = "otp_verificationn_screen"
     )
+    object RegisterUserOTPScreen : Routes(
+        route = "register_user_otp_screen"
+    )
     object PasswordChangedScreen  : Routes(
         route = "password_changed_screen"
     )

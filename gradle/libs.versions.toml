@@ -15,6 +15,7 @@ imageLoader = "1.7.8"
 junit = "4.13.2"
 kotlin = "2.0.0"
 material3Android = "1.2.1"
+voyager = "1.0.0"
 
 [libraries]
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
@@ -29,6 +30,11 @@ androidx-material = { group = "com.google.android.material", name = "material", 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

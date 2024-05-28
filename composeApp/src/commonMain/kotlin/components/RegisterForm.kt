@@ -32,13 +32,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import org.example.project.resources.Res
 import org.example.project.resources.hide
 import org.example.project.resources.seen
 import org.jetbrains.compose.resources.painterResource
+import screenRoutes.BottomNavScreen
+import screenRoutes.Routes
 
 @Composable
-fun RegisterForm(){
+fun RegisterForm(
+    navController: NavHostController
+){
 
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -253,6 +258,14 @@ fun RegisterForm(){
             if(!password.equals(confirmPassword)){
                 passwordError = true
                 confirmPasswordError = true
+            }
+
+            if(!emailError && !userNameError && !passwordError && !confirmPasswordError){
+                navController.navigate(Routes.RegisterUserOTPScreen.route){
+                    popUpTo(route = Routes.RegisterUserOTPScreen.route){
+                        inclusive = true
+                    }
+                }
             }
         },
         modifier = Modifier.fillMaxWidth()

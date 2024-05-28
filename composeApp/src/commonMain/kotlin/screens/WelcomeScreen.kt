@@ -3,6 +3,8 @@ package screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +19,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,6 +35,8 @@ import org.example.project.resources.welcome1
 import org.example.project.resources.welcome2
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import screenRoutes.BottomNavScreen
+import screenRoutes.Routes
 
 
 @Composable
@@ -69,7 +74,7 @@ fun WelcomeScreen(
         WelcomeImage(Res.drawable.welcome1,"")
 
         //Spacer(modifier = Modifier.fillMaxHeight(0.1f))
-        LoginRegister()
+        LoginRegister(navController = navController)
 
         Spacer(modifier = Modifier.fillMaxHeight(0.2f))
 
@@ -79,7 +84,19 @@ fun WelcomeScreen(
                 fontSize = 15.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color(0xff35c2c1)
-            )
+            ),
+            modifier =  Modifier
+                .clickable (
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = {
+                        navController.navigate(BottomNavScreen.HomeScreen.route){
+                            popUpTo(BottomNavScreen.HomeScreen.route){
+                                inclusive = true
+                            }
+                        }
+                    }
+                )
         )
 
         Spacer(modifier = Modifier.fillMaxHeight(0.13f))
@@ -139,7 +156,9 @@ fun WelcomeImage(
 
 
 @Composable
-fun LoginRegister(){
+fun LoginRegister(
+    navController: NavHostController
+){
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -147,7 +166,11 @@ fun LoginRegister(){
     ){
         Button(
             onClick = {
-
+                navController.navigate(route = Routes.LoginScreen.route){
+                    popUpTo(route = Routes.LoginScreen.route){
+                        inclusive = true
+                    }
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -167,7 +190,11 @@ fun LoginRegister(){
         Spacer(modifier = Modifier.height(10.dp))
         Button(
             onClick = {
-
+                    navController.navigate(route = Routes.RegisterScreen.route){
+                        popUpTo(route = Routes.RegisterScreen.route){
+                            inclusive = true
+                        }
+                    }
             },
             modifier = Modifier
                 .fillMaxWidth()

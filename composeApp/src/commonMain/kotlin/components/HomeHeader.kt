@@ -45,7 +45,7 @@ fun HomeHeader(){
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(235.dp)
+                .height(210.dp)
         ) {
             val (box1, box2) = createRefs()
 
@@ -81,15 +81,16 @@ fun HomeHeader(){
                     .constrainAs(box2){
                         start.linkTo(box1.start)
                         end.linkTo(box1.end)
-                        top.linkTo(box1.top, margin = 98.dp)
+                        top.linkTo(box1.top, margin = 70.dp)
                     }
-                    .height(138.dp)
+                    .height(140.dp)
                     .fillMaxWidth(0.88f)
                     .background(Color(0xff1e232c), shape = RoundedCornerShape(8.dp))
             ){
                 Column(
                     modifier = Modifier.fillMaxSize()
-                        .padding(top = 15.dp , bottom = 15.dp , start = 20.dp, end = 20.dp)
+                        .padding(top = 10.dp , bottom = 10.dp , start = 20.dp, end = 20.dp),
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = "4 May 2024",

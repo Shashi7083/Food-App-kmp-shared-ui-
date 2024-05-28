@@ -44,10 +44,11 @@ import androidx.compose.ui.unit.max
 import androidx.navigation.NavHostController
 import components.GoBack
 import components.HeadingText
+import screenRoutes.BottomNavScreen
 import screenRoutes.Routes
 
 @Composable
-fun OTPVerificationScreen(
+fun RegisterUserOTPScreen(
     navController : NavHostController
 ){
 
@@ -225,10 +226,11 @@ fun OTPVerificationScreen(
         Button(
             onClick = {
                 val otp = otp1 + otp2 + otp3 + otp4
+                println(otp)
                 if(otp.length == 4){
-                    navController.navigate(Routes.NewPasswordScreen.route){
-                        popUpTo(Routes.NewPasswordScreen.route){
-                            inclusive = true
+                    navController.navigate(BottomNavScreen.HomeScreen.route){
+                        popUpTo(BottomNavScreen.HomeScreen.route){
+                            inclusive  = true
                         }
                     }
                 }

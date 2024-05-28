@@ -27,6 +27,7 @@ import components.HeadingText
 import org.example.project.resources.Res
 import org.example.project.resources.success
 import org.jetbrains.compose.resources.painterResource
+import screenRoutes.Routes
 
 @Composable
 fun PasswordChangedScreen(
@@ -60,7 +61,11 @@ fun PasswordChangedScreen(
 
             Button(
                 onClick = {
-
+                    navController.navigate(Routes.LoginScreen.route){
+                        popUpTo(Routes.LoginScreen.route){
+                            inclusive = true
+                        }
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
                     .height(54.dp),

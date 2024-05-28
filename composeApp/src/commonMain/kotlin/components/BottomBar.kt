@@ -83,6 +83,7 @@ fun BottomBar(
 
 
 
+
                         Icon(
                             painter = if(selectedScreen.equals(screen.route)) painterResource(screen.selectedIcon) else painterResource(screen.unselectedIcon),
                             contentDescription = "selected icon",

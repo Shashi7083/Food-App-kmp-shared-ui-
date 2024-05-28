@@ -88,7 +88,8 @@ fun FriendDetailsForm(
             .padding(start = 20.dp, end = 20.dp),
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ){
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+
         Text(
             text = "Friend Details",
             style = TextStyle(

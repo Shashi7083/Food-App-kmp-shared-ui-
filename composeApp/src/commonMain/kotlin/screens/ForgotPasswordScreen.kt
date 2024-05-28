@@ -39,6 +39,7 @@ import androidx.navigation.NavHostController
 import components.GoBack
 import components.HeadingText
 import components.RegisterForm
+import screenRoutes.Routes
 
 @Composable
 fun ForgotPasswordScreen(
@@ -54,7 +55,7 @@ fun ForgotPasswordScreen(
             .padding(start = 20.dp, end = 20.dp, top = 25.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
-        GoBack()
+        GoBack(navController = navController)
 
         HeadingText(text = "Hello! Register to get Started")
 
@@ -110,6 +111,14 @@ fun ForgotPasswordScreen(
             onClick = {
                 if(!components.isValidEmail(email)){
                     emailError = true
+                }
+
+                if(!emailError){
+                    navController.navigate(Routes.OTPVerificationScreen.route){
+                        popUpTo(Routes.OTPVerificationScreen.route){
+                            inclusive = true
+                        }
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth()

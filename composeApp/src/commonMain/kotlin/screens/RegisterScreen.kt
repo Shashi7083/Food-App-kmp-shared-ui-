@@ -24,6 +24,7 @@ import androidx.navigation.NavHostController
 import components.GoBack
 import components.HeadingText
 import components.RegisterForm
+import screenRoutes.Routes
 
 @Composable
 fun RegisterScreen(
@@ -34,11 +35,11 @@ fun RegisterScreen(
             .padding(start = 20.dp, end = 20.dp, top = 25.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(25.dp)
     ) {
-        GoBack()
+        GoBack(navController = navController)
 
         HeadingText(text = "Hello! Register to get Started")
 
-        RegisterForm()
+        RegisterForm(navController = navController)
 
         Spacer(modifier = Modifier.height(10.dp))
         Row (
@@ -59,7 +60,11 @@ fun RegisterScreen(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() },
                     onClick = {
-                        // Handle click event
+                        navController.navigate(Routes.LoginScreen.route){
+                            popUpTo(Routes.LoginScreen.route){
+                                inclusive = true
+                            }
+                        }
                     }
                 )
             )

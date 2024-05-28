@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import components.BottomBar
+import components.HomeHeader
 import components.PaymentHeader
 import components.PaymentHistoryView
 import org.example.project.resources.Res
@@ -64,6 +65,7 @@ fun PaymentScreen(
                 navController = navController,
                 dueTotal = "-2500 INR"
             )
+
 
             LazyColumn(
                     modifier = Modifier

@@ -4,6 +4,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,6 +53,8 @@ import org.example.project.resources.Res
 import org.example.project.resources.hide
 import org.example.project.resources.seen
 import org.jetbrains.compose.resources.painterResource
+import screenRoutes.BottomNavScreen
+import screenRoutes.Routes
 import utils.getVibrationUtil
 
 
@@ -63,16 +67,21 @@ fun LoginScreen(
 //    val vibrationUtil = getVibrationUtil()
 
     var email by remember { mutableStateOf("") }
-    var isEmailValid by remember { mutableStateOf(false) }
+    var isEmailValid by remember { mutableStateOf(true) }
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
+
+    var emailError by remember { mutableStateOf(false) }
+    var passwordError by remember { mutableStateOf(false) }
 
     Column (
         modifier = Modifier.fillMaxSize()
             .padding(start = 20.dp, end = 20.dp, top = 25.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(25.dp)
     ){
-        GoBack()
+        GoBack(
+            navController = navController
+        )
 
         HeadingText(text = "Welcome back! Glad to see you, Again!")
 
@@ -86,6 +95,10 @@ fun LoginScreen(
                 onValueChange = {
                     email = it
                     isEmailValid = isValidEmail(email)
+                    if(!email.isEmpty() && isValidEmail(email)){
+                        emailError = false
+                    }
+
                 },
                 modifier = Modifier.fillMaxWidth()
                     .background(Color(0xfff7f8f9)),
@@ -94,13 +107,13 @@ fun LoginScreen(
                         text = "Enter your email"
                     )
                 },
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedBorderColor = if(emailError) Color.Red else Color(0xffe8ecf4),
+                    focusedBorderColor = if(emailError) Color.Red else Color(0xff7356bf)
+                ),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Email,
                     imeAction =  ImeAction.Done
-                ),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    unfocusedBorderColor = Color(0xffe8ecf4)
-
                 )
             )
 
@@ -108,6 +121,10 @@ fun LoginScreen(
                 value = password,
                 onValueChange = {
                     password = it
+
+                    if(!password.isEmpty()){
+                        passwordError = false
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,7 +134,8 @@ fun LoginScreen(
                     imeAction = ImeAction.Done
                 ),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    unfocusedBorderColor = Color(0xffe8ecf4)
+                    unfocusedBorderColor = if(passwordError) Color.Red else Color(0xffe8ecf4),
+                    focusedBorderColor = if(passwordError) Color.Red else Color(0xff7356bf)
                 ),
                 placeholder = {
                     Text(
@@ -157,17 +175,37 @@ fun LoginScreen(
                     text = "Forgot Password?",
                     style = TextStyle(
                         color = Color(0xff808080)
-                    )
+                    ), modifier = Modifier
+                        .clickable (
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() },
+                            onClick = {
+                                navController.navigate(Routes.ForgotPasswordScreen.route){
+                                    popUpTo(Routes.ForgotPasswordScreen.route){
+                                        inclusive = true
+                                    }
+                                }
+                            }
+                        )
                 )
             }
         }
 
         Button(
             onClick = {
-                if(isEmailValid){
+                if(email.isEmpty() || !isValidEmail(email)){
+                    emailError = true
+                }
+                if(password.isEmpty()){
+                    passwordError = true
+                }
 
-                }else{
-
+                if(!emailError && isEmailValid && !passwordError){
+                    navController.navigate(BottomNavScreen.HomeScreen.route){
+                        popUpTo(BottomNavScreen.HomeScreen.route){
+                            inclusive = true
+                        }
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth()
@@ -199,7 +237,19 @@ fun LoginScreen(
                 style = TextStyle(
                     fontWeight = FontWeight.SemiBold,
                     color = Color(0xff35c2c1)
-                )
+                ),
+                modifier = Modifier
+                    .clickable (
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() },
+                        onClick = {
+                            navController.navigate(Routes.RegisterScreen.route){
+                                popUpTo(Routes.RegisterScreen.route){
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    )
             )
         }
 
